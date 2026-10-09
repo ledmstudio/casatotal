@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Finalizar Pedido | Casa Total App</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body class="app-body">
+
+  <!-- APP SHELL CONTAINER (NATIVE APP VIEWPORT) -->
+  <div class="app-shell">
+
+    <!-- APP TOP BAR -->
+    <header class="app-topbar">
+      <a href="index.html" class="app-back-btn" title="Volver al inicio">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M15 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <div class="app-topbar-center">
+        <img src="logo.png" alt="Casa Total" class="app-topbar-logo">
+        <div class="app-topbar-text">
+          <h1 class="app-screen-title">Finalizar Pedido</h1>
+          <span class="app-brand-subtitle">Casa Total Ferretería</span>
+        </div>
+      </div>
+      <div class="app-secure-pill">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>Seguro</span>
+      </div>
+    </header>
+
+    <!-- COLLAPSIBLE ORDER SUMMARY ACCORDION (UBER/PEDIDOSYA APP PATTERN) -->
+    <section class="app-cart-accordion" id="cartAccordion">
+      <div class="accordion-bar" onclick="checkoutApp.toggleSummaryAccordion()">
+        <div class="accordion-left">
+          <span class="cart-pill-icon">🛒</span>
+          <div>
+            <strong id="accordionItemCount">1 producto</strong>
+            <small class="accordion-toggle-hint">Toca para ver desglose ▾</small>
+          </div>
+        </div>
+        <div class="accordion-right">
+          <strong class="accordion-total-usd" id="accordionTotalUsd">USD 0,00</strong>
+          <small class="accordion-total-bs" id="accordionTotalBs">Bs 0,00</small>
+        </div>
+      </div>
+
+      <!-- Expandable Items Drawer -->
+      <div class="accordion-drawer" id="accordionDrawer">
+        <div class="drawer-items-list" id="drawerItemsList">
+          <!-- Populated by JS -->
+        </div>
+        <div class="drawer-price-breakdown">
+          <div class="breakdown-row">
+            <span>Subtotal productos:</span>
+            <strong id="drawerSubtotalUsd">USD 0,00</strong>
+          </div>
+          <div class="breakdown-row">
+            <span>Costo de entrega:</span>
+            <strong id="drawerDeliveryFee">USD 5,00</strong>
+          </div>
+          <div class="breakdown-row rate-row">
+            <span>Tasa BCV oficial:</span>
+            <span id="drawerBcvRate">Bs 875,65</span>
+          </div>
+          <div class="breakdown-divider"></div>
+          <div class="breakdown-row total-highlight">
+            <span>Total a pagar:</span>
+            <strong id="drawerGrandTotalUsd">USD 0,00</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEGMENTED APP TIMELINE (EXACTLY 3 STEPS) -->
+    <nav class="app-timeline-nav">
+      <div class="timeline-tabs-track">
+        <button type="button" class="timeline-tab active" id="tabStep1" onclick="checkoutApp.goToStep(1)">
+          <span class="tab-badge">1</span>
+          <span class="tab-name">Entrega & Pago</span>
+        </button>
+        <button type="button" class="timeline-tab" id="tabStep2" onclick="checkoutApp.goToStep(2)">
+          <span class="tab-badge">2</span>
+          <span class="tab-name">Datos & Recibo</span>
+        </button>
+        <button type="button" class="timeline-tab" id="tabStep3">
+          <span class="tab-badge">3</span>
+          <span class="tab-name">Confirmación</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- APP VIEWS / STEP CONTENT -->
+    <main class="app-content-body">
+
+      <!-- ==================== SCREEN 1: ENTREGA & PAGO ==================== -->
+      <div class="app-step-screen active" id="screenStep1">
+
+        <!-- BLOQUE 1: MODALIDAD DE ENTREGA (3 BOTONES APP) -->
+        <div class="app-card-section">
+          <div class="section-title-row">
+            <span class="step-num-badge">1</span>
+            <div>
+              <h2 class="section-heading">¿Cómo deseas recibir tu compra?</h2>
+              <p class="section-subtext">Selecciona una modalidad para ver los métodos de pago:</p>
+            </div>
+          </div>
+
+          <div class="app-delivery-grid">
+            <!-- 1. Delivery -->
+            <button type="button" class="delivery-app-card active" id="btnDelivery" onclick="checkoutApp.selectDeliveryMethod('delivery')">
+              <div class="delivery-app-icon">🛵</div>
+              <div class="delivery-app-body">
+                <div class="delivery-header-line">
+                  <strong>Delivery Express</strong>
+                  <span class="delivery-cost-tag">$5.00</span>
+                </div>
+                <p>En tu ciudad directo a tu obra, taller o casa (mismo día)</p>
+              </div>
+              <div class="app-radio-indicator"></div>
+            </button>
+
+            <!-- 2. Retiro en Almacén -->
+            <button type="button" class="delivery-app-card" id="btnRetiro" onclick="checkoutApp.selectDeliveryMethod('retiro')">
+              <div class="delivery-app-icon">🏬</div>
+              <div class="delivery-app-body">
+                <div class="delivery-header-line">
+                  <strong>Retiro en Almacén</strong>
+                  <span class="delivery-cost-tag free">¡GRATIS!</span>
+                </div>
+                <p>Retira sin costo en sede de mostrador o carga</p>
+              </div>
+              <div class="app-radio-indicator"></div>
+            </button>
+
+            <!-- 3. Envío Nacional -->
+            <button type="button" class="delivery-app-card" id="btnEnvio" onclick="checkoutApp.selectDeliveryMethod('envio')">
+              <div class="delivery-app-icon">🚚</div>
+              <div class="delivery-app-body">
+                <div class="delivery-header-line">
+                  <strong>Envío Nacional</strong>
+                  <span class="delivery-cost-tag national">$20.00</span>
+                </div>
+                <p>Envíos a toda Venezuela por MRW o Zoom</p>
+              </div>
+              <div class="app-radio-indicator"></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- BLOQUE 2: MÉTODOS DE PAGO DINÁMICOS -->
+        <div class="app-card-section">
+          <div class="section-title-row">
+            <span class="step-num-badge">2</span>
+            <div>
+              <h2 class="section-heading">Método de Pago</h2>
+              <p class="section-subtext" id="paymentOptionsSubtitle">Selecciona cómo deseas realizar tu pago:</p>
+            </div>
+          </div>
+
+          <div class="app-payment-chips-grid" id="paymentChipsGrid">
+            <!-- Populated dynamically by JS -->
+          </div>
+
+          <!-- TARJETA BANCARIA / DETALLES DE PAGO -->
+          <div class="app-bank-display-card" id="bankDisplayCard">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Spacer for sticky bar -->
+        <div class="app-bottom-spacer"></div>
+
+        <!-- STICKY BOTTOM APP BAR -->
+        <div class="app-sticky-footer">
+          <div class="footer-total-col">
+            <span class="footer-label">Total a Pagar:</span>
+            <strong class="footer-price-usd" id="footerTotalUsd">USD 0,00</strong>
+            <small class="footer-price-bs" id="footerTotalBs">Bs 0,00</small>
+          </div>
+          <button type="button" class="app-btn-continue" onclick="checkoutApp.advanceToStep(2)">
+            <span>Continuar a Mis Datos</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+
+      <!-- ==================== SCREEN 2: DATOS & COMPROBANTE ==================== -->
+      <div class="app-step-screen" id="screenStep2">
+
+        <form id="orderForm" onsubmit="checkoutApp.submitOrder(event)">
+
+          <!-- BLOQUE A: COMPROBANTE DE PAGO -->
+          <div class="app-card-section" id="proofSection">
+            <div class="section-title-row">
+              <span class="step-num-badge">3</span>
+              <div>
+                <h2 class="section-heading">Comprobante de Pago</h2>
+                <p class="section-subtext">Registra tu número de referencia y adjunta la captura:</p>
+              </div>
+            </div>
+
+            <!-- Si es Pago Móvil o Transferencia -->
+            <div id="bankInputsWrapper">
+              <div class="app-input-group">
+                <label for="clientBank">Banco emisor desde donde pagaste</label>
+                <select id="clientBank" class="app-input-field">
+                  <option value="Banesco">Banesco Banco Universal</option>
+                  <option value="Banco de Venezuela (BDV)">Banco de Venezuela (BDV)</option>
+                  <option value="Mercantil">Banco Mercantil</option>
+                  <option value="BNC (Banco Nacional de Crédito)">BNC (Banco Nacional de Crédito)</option>
+                  <option value="BBVA Provincial">BBVA Provincial</option>
+                  <option value="Bancamiga">Bancamiga</option>
+                  <option value="Bancaribe">Bancaribe</option>
+                  <option value="Otro Banco">Otro Banco Nacional</option>
+                </select>
+              </div>
+
+              <div class="app-input-group">
+                <label for="paymentRef">Número de Referencia Bancaria</label>
+                <input type="text" id="paymentRef" class="app-input-field" placeholder="Ej. 984021 ó últimos dígitos">
+              </div>
+
+              <div class="app-input-group">
+                <label>Adjuntar Captura del Comprobante</label>
+                <div class="app-upload-box" id="uploadBox" onclick="document.getElementById('proofInput').click()">
+                  <input type="file" id="proofInput" accept="image/*,.pdf" class="file-hidden" onchange="checkoutApp.handleProofUpload(this)">
+                  <div class="upload-idle-state" id="uploadIdle">
+                    <span class="upload-icon">📸</span>
+                    <strong>Toca para subir captura o foto</strong>
+                    <small>JPG, PNG o PDF de tu comprobante</small>
+                  </div>
+                  <div class="upload-success-state" id="uploadSuccess" style="display: none;">
+                    <img id="uploadImgThumb" src="" alt="Comprobante" class="upload-thumb">
+                    <div class="upload-success-meta">
+                      <strong id="uploadFileName">comprobante.jpg</strong>
+                      <span class="success-chip">✓ Captura lista</span>
+                    </div>
+                    <button type="button" class="btn-clear-upload" onclick="checkoutApp.clearProof(event)">&times;</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Si es Efectivo: indicación de vuelto -->
+            <div id="cashDetailsWrapper" style="display: none;">
+              <div class="app-input-group">
+                <label>¿Con cuánto pagarás en efectivo? (Para preparar tu vuelto):</label>
+                <div class="denomination-chips">
+                  <button type="button" class="denom-chip active" onclick="checkoutApp.selectCashDenom(this, 'Monto Exacto')">Monto Exacto</button>
+                  <button type="button" class="denom-chip" onclick="checkoutApp.selectCashDenom(this, 'Billete $20')">Billete $20</button>
+                  <button type="button" class="denom-chip" onclick="checkoutApp.selectCashDenom(this, 'Billete $50')">Billete $50</button>
+                  <button type="button" class="denom-chip" onclick="checkoutApp.selectCashDenom(this, 'Billete $100')">Billete $100</button>
+                  <button type="button" class="denom-chip" onclick="checkoutApp.selectCashDenom(this, 'Bs en Efectivo')">Bs en Efectivo</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Si es Punto de Venta -->
+            <div id="posDetailsWrapper" style="display: none;">
+              <div class="app-input-group">
+                <label>Tipo de tarjeta con la que cancelarás:</label>
+                <div class="denomination-chips">
+                  <button type="button" class="denom-chip active" onclick="checkoutApp.selectPosCard(this, 'Débito Nacional')">Débito Nacional</button>
+                  <button type="button" class="denom-chip" onclick="checkoutApp.selectPosCard(this, 'Crédito Nacional')">Crédito Nacional</button>
+                  <button type="button" class="denom-chip" onclick="checkoutApp.selectPosCard(this, 'Internacional')">Internacional</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOQUE B: DESTINO DE ENTREGA SEGÚN LO ELEGIDO -->
+          <div class="app-card-section" id="deliveryDestinationSection">
+            <div class="section-title-row">
+              <span class="step-num-badge">4</span>
+              <div>
+                <h2 class="section-heading" id="destinationHeading">Dirección de Entrega</h2>
+                <p class="section-subtext" id="destinationSubtext">Ingresa las coordenadas exactas:</p>
+              </div>
+            </div>
+
+            <!-- 1. CAMPOS DELIVERY -->
+            <div id="fieldsDeliveryWrapper">
+              <div class="app-input-group">
+                <label for="delCity">Ciudad / Zona</label>
+                <select id="delCity" class="app-input-field">
+                  <option value="Valencia">Valencia (Carabobo)</option>
+                  <option value="Caracas (Gran Caracas)">Caracas (Gran Caracas)</option>
+                  <option value="Maracay">Maracay (Aragua)</option>
+                  <option value="Barquisimeto">Barquisimeto (Lara)</option>
+                  <option value="Naguanagua / San Diego">Naguanagua / San Diego</option>
+                  <option value="Puerto Cabello">Puerto Cabello</option>
+                  <option value="Maracaibo">Maracaibo</option>
+                </select>
+              </div>
+
+              <div class="app-input-group">
+                <label for="delSector">Sector / Urbanización</label>
+                <input type="text" id="delSector" class="app-input-field" placeholder="Ej. El Parral / Av. Bolívar / Prebo">
+              </div>
+
+              <div class="app-input-group">
+                <label for="delAddress">Dirección Detallada de Entrega</label>
+                <textarea id="delAddress" class="app-input-field" rows="2" placeholder="Calle, Av., Casa/Galpón, Piso/Nro, Punto de referencia clave..."></textarea>
+              </div>
+
+              <!-- TOGGLE: ¿MISMA DIRECCIÓN DE FACTURACIÓN? -->
+              <div class="app-toggle-row">
+                <div class="toggle-text">
+                  <strong>Dirección de facturación</strong>
+                  <small>¿Es la misma que la de entrega?</small>
+                </div>
+                <label class="switch-toggle">
+                  <input type="checkbox" id="sameBillingToggle" checked onchange="checkoutApp.toggleBillingFields()">
+                  <span class="slider-round"></span>
+                </label>
+              </div>
+
+              <!-- DIRECCIÓN CORTA DE FACTURACIÓN SI ES DIFERENTE -->
+              <div class="app-subcard-billing" id="differentBillingSubcard" style="display: none;">
+                <h4 class="billing-card-heading">🧾 Facturación Fiscal (Dirección Corta)</h4>
+                <div class="app-input-group">
+                  <label for="billFiscalName">Razón Social o Nombre Fiscal</label>
+                  <input type="text" id="billFiscalName" class="app-input-field" placeholder="Ej. Ferretería El Roble C.A. o Nombre">
+                </div>
+                <div class="app-input-group">
+                  <label for="billFiscalRif">RIF o Cédula Fiscal</label>
+                  <input type="text" id="billFiscalRif" class="app-input-field" placeholder="Ej. J-30129841-0 ó V-14234567">
+                </div>
+                <div class="app-input-group">
+                  <label for="billFiscalShort">Dirección Fiscal Corta</label>
+                  <input type="text" id="billFiscalShort" class="app-input-field" placeholder="Ej. Zona Industrial La Candelaria, Valencia">
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. CAMPOS RETIRO EN ALMACÉN -->
+            <div id="fieldsRetiroWrapper" style="display: none;">
+              <div class="app-input-group">
+                <label for="pickupLocation">Almacén / Tienda de Retiro</label>
+                <select id="pickupLocation" class="app-input-field">
+                  <option value="Sede Principal Valencia - Av. Bolívar Norte">🏬 Sede Principal Valencia - Av. Bolívar Norte</option>
+                  <option value="Tienda Naguanagua - CC Cristal">🏬 Tienda Naguanagua - CC Cristal</option>
+                  <option value="Tienda San Diego - Av. Don Julio Centeno">🏬 Tienda San Diego - Av. Don Julio Centeno</option>
+                  <option value="Tienda Barquisimeto Este - Av. Lara">🏬 Tienda Barquisimeto Este - Av. Lara</option>
+                  <option value="Tienda Maracay - Av. Las Delicias">🏬 Tienda Maracay - Av. Las Delicias</option>
+                </select>
+              </div>
+              <div class="app-input-group">
+                <label for="pickupPerson">Nombre de quien retira en almacén</label>
+                <input type="text" id="pickupPerson" class="app-input-field" placeholder="Nombre completo">
+              </div>
+            </div>
+
+            <!-- 3. CAMPOS ENVÍO NACIONAL -->
+            <div id="fieldsEnvioWrapper" style="display: none;">
+              <div class="app-input-group">
+                <label for="shipCourier">Empresa de Encomienda</label>
+                <select id="shipCourier" class="app-input-field">
+                  <option value="MRW">📦 MRW Nacional (Tarifa $20.00)</option>
+                  <option value="Zoom">📦 Zoom Nacional (Tarifa $20.00)</option>
+                  <option value="Tealca">📦 Tealca Nacional (Tarifa $20.00)</option>
+                </select>
+              </div>
+              <div class="app-input-group">
+                <label for="shipState">Estado y Ciudad Destino</label>
+                <input type="text" id="shipState" class="app-input-field" placeholder="Ej. Lara, Barquisimeto">
+              </div>
+              <div class="app-input-group">
+                <label for="shipAgency">Agencia / Oficina de Retiro</label>
+                <input type="text" id="shipAgency" class="app-input-field" placeholder="Ej. Agencia MRW Los Próceres 0204">
+              </div>
+              <div class="app-input-group">
+                <label for="shipFiscalAddress">Dirección Fiscal Corta (Para Factura Legal)</label>
+                <input type="text" id="shipFiscalAddress" class="app-input-field" placeholder="Dirección fiscal corta para la guía y factura SENIAT">
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOQUE C: DATOS PERSONALES DEL CLIENTE -->
+          <div class="app-card-section">
+            <div class="section-title-row">
+              <span class="step-num-badge">5</span>
+              <div>
+                <h2 class="section-heading">Datos del Cliente</h2>
+                <p class="section-subtext">Para contactarte y generar tu recibo:</p>
+              </div>
+            </div>
+
+            <div class="app-input-group">
+              <label for="clientName">Nombre y Apellido</label>
+              <input type="text" id="clientName" class="app-input-field" placeholder="Ej. Carlos Pérez">
+            </div>
+
+            <div class="app-input-group">
+              <label for="clientId">Cédula o RIF</label>
+              <input type="text" id="clientId" class="app-input-field" placeholder="Ej. V-18.456.789">
+            </div>
+
+            <div class="app-input-group">
+              <label for="clientPhone">Teléfono / WhatsApp</label>
+              <input type="tel" id="clientPhone" class="app-input-field" placeholder="Ej. 0412-1234567">
+            </div>
+
+            <div class="app-input-group">
+              <label for="clientEmail">Correo Electrónico</label>
+              <input type="email" id="clientEmail" class="app-input-field" placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="app-input-group">
+              <label for="clientNotes">Notas o Instrucciones (Opcional)</label>
+              <input type="text" id="clientNotes" class="app-input-field" placeholder="Ej. Dejar en vigilancia / Portón gris / Llamar antes">
+            </div>
+          </div>
+
+          <!-- Spacer for sticky bar -->
+          <div class="app-bottom-spacer"></div>
+
+          <!-- STICKY BOTTOM APP BAR -->
+          <div class="app-sticky-footer">
+            <button type="button" class="app-btn-back-step" onclick="checkoutApp.goToStep(1)">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button type="submit" class="app-btn-confirm-order">
+              <span>Confirmar Pedido</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <!-- ==================== SCREEN 3: CONFIRMACIÓN Y WHATSAPP ==================== -->
+      <div class="app-step-screen" id="screenStep3">
+
+        <div class="app-success-card">
+          <div class="app-success-bubble">
+            <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#ffffff" stroke-width="3">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+
+          <span class="app-success-tag">¡PEDIDO REGISTRADO!</span>
+          <h2 class="app-success-heading">Gracias por tu compra en Casa Total</h2>
+          <p class="app-success-sub">Tu número de orden oficial es:</p>
+          <div class="app-order-badge" id="confirmedOrderId">CT-00000</div>
+
+          <!-- RECIBO DIGITAL -->
+          <div class="app-digital-receipt" id="digitalReceiptBox">
+            <!-- Filled dynamically -->
+          </div>
+
+          <!-- DUAL ACTION BUTTONS: WHATSAPP + ASESOR -->
+          <div class="app-dual-actions">
+            <a href="#" id="btnWhatsAppDispatch" target="_blank" class="app-whatsapp-btn">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.19-.09-1.11-.55-1.28-.61-.17-.07-.3-.1-.43.1-.13.19-.5 0.61-.61.73-.11.13-.23.15-.42.05-.19-.09-.81-.3-1.54-.95-.57-.51-.95-1.14-1.06-1.33-.11-.19-.01-.3.08-.39.09-.09.19-.23.29-.35.09-.11.13-.19.19-.32.06-.13.03-.25-.01-.34-.05-.09-.43-1.04-.59-1.42-.16-.38-.32-.33-.44-.33h-.37c-.13 0-.34.05-.52.24-.18.19-.69.67-.69 1.64 0 .97.71 1.9 1.01 2.1.3.2 1.4 2.14 3.39 3 1.99.85 1.99.57 2.35.53.36-.04 1.15-.47 1.31-.93.16-.46.16-.86.11-.93-.05-.07-.18-.12-.37-.21z"/>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+            <a href="#" id="btnAsesorDispatch" target="_blank" class="app-asesor-btn">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              <span>Asesor</span>
+            </a>
+          </div>
+
+          <div class="app-post-actions">
+            <button type="button" class="btn-app-print" onclick="window.print()">
+              <span>Imprimir Recibo</span>
+            </button>
+            <a href="index.html" class="btn-app-home" onclick="checkoutApp.clearCartAndFinish()">
+              <span>Volver a la Tienda</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="app-toast" id="appToast">
+    <span id="toastMsg">Notificación</span>
+  </div>
+
+  <!-- ASESOR VIRTUAL / CHATBOT MODAL -->
+  <div class="chat-advisor-backdrop" id="orderChatBackdrop"></div>
+  <aside class="chat-advisor-modal" id="orderChatModal">
+    <div class="chat-advisor-header">
+      <div class="chat-advisor-info">
+        <div class="chat-advisor-avatar" style="background:#FF5B00;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Asesor Virtual Casa Total</h4>
+          <span class="chat-status"><span class="status-dot"></span>En línea • Verificación de Pedidos</span>
+        </div>
+      </div>
+      <button class="chat-close-btn" id="closeOrderChatBtn" aria-label="Cerrar Chat">&times;</button>
+    </div>
+
+    <div class="chat-advisor-messages" id="orderChatMessages">
+      <!-- Injected with order greetings and options -->
+    </div>
+
+    <div class="chat-advisor-chips" id="orderChatChips">
+      <button type="button" class="reply-chip" onclick="checkoutApp.handleBotQuestion('tiempo_entrega')">🚚 ¿Cuánto tarda mi entrega?</button>
+      <button type="button" class="reply-chip" onclick="checkoutApp.handleBotQuestion('estatus_pago')">💳 ¿Cómo validan mi pago?</button>
+      <button type="button" class="reply-chip" onclick="checkoutApp.handleBotQuestion('hablar_humano')">📲 Contactar por WhatsApp</button>
+    </div>
+
+    <form class="chat-advisor-input-row" id="orderChatForm">
+      <input type="text" id="orderChatInput" placeholder="Escribe tu consulta sobre el pedido..." autocomplete="off">
+      <button type="submit" aria-label="Enviar mensaje" style="background:#FF5B00;">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </form>
+  </aside>
+
+  <script src="checkout.js"></script>
+</body>
+</html>

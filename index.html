@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Casa Total | Ferretería, Herramientas y Artículos para el Hogar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="normal-app-body">
+
+  <!-- APP CONTAINER (Mobile Responsive Frame) -->
+  <div class="app-container" id="appContainer">
+
+    <!-- MAIN APP CONTENT -->
+    <main class="app-main" id="appMain">
+
+      <!-- 1. HEADER (Jet Black Bar, Casa Total Logo, Cart, Search, Brands) -->
+      <header class="app-header">
+        <div class="header-main-row">
+          <!-- Hamburger menu button -->
+          <button class="icon-btn hamburger-btn" id="openDrawerBtn" aria-label="Abrir Menú de Departamentos">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+
+          <!-- Brand Logo (Casa Total) -->
+          <div class="header-logo" id="headerHomeLogo">
+            <img src="./logo.png" alt="Casa Total Logo" class="brand-logo-img">
+          </div>
+
+          <!-- Cart Button -->
+          <button class="icon-btn cart-btn" id="openCartBtn" aria-label="Ver Carrito de Compras">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            <span class="cart-badge" id="cartCountBadge">0</span>
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+          <form id="searchForm" class="search-form">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar productos, marcas, departamentos..." autocomplete="off">
+            <button type="submit" class="search-action-btn" aria-label="Buscar">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Brand Pills Scroller -->
+        <div class="brands-pills-row" id="brandsPillsRow">
+          <button class="brand-pill active" data-brand="all">Todas</button>
+          <button class="brand-pill" data-brand="Dr care">Dr care</button>
+          <button class="brand-pill" data-brand="Ingco">Ingco</button>
+          <button class="brand-pill" data-brand="Truper">Truper</button>
+          <button class="brand-pill" data-brand="Stanley">Stanley</button>
+          <button class="brand-pill" data-brand="Bosch">Bosch</button>
+          <button class="brand-pill" data-brand="Black+Decker">Black+Decker</button>
+          <button class="brand-pill" data-brand="DeWalt">DeWalt</button>
+        </div>
+      </header>
+
+      <!-- 2. ANNOUNCEMENT PROMO BAR (Vibrant Orange, Fixed) -->
+      <div class="promo-announcement-bar" id="promoAnnouncementBar">
+        <span class="promo-fixed-text">DESCUENTO DEL 20% EN UTENSILIOS DE COCINA</span>
+      </div>
+
+      <!-- 3. HERO BANNER CAROUSEL -->
+      <section class="hero-slider-section">
+        <div class="hero-slider-viewport" id="heroSlider">
+          <!-- Slide 1: Modern Kitchen (Exact from home.jpg) -->
+          <div class="hero-slide active">
+            <img src="./assets/hero-kitchen.jpg" alt="Cocina y Hogar Casa Total" class="hero-banner-full-img">
+          </div>
+          <!-- Slide 2: Hardware Workshop -->
+          <div class="hero-slide">
+            <img src="./assets/banner-ferreteria.jpg" alt="Ferretería y Herramientas" class="hero-banner-full-img">
+          </div>
+        </div>
+
+        <!-- Slider Dots -->
+        <div class="slider-dots" id="sliderDots">
+          <button class="slider-dot active" data-slide="0"></button>
+          <button class="slider-dot" data-slide="1"></button>
+          <button class="slider-dot" data-slide="2"></button>
+        </div>
+      </section>
+
+      <!-- 4. SLOGAN / SECTION TITLE -->
+      <section class="section-slogan">
+        <h2>Dale vida a tus proyectos: herramientas, ferretería y artículos para el hogar.</h2>
+      </section>
+
+      <!-- 5. INTERACTIVE CATEGORY CAROUSEL & LINKED SOLID ORANGE ENCLOSURE ("UN GROSOR DE NARANJA") -->
+      <section class="category-ecosystem-section" id="categorySection">
+        
+        <!-- Category Selector Cards Row (Automotriz, Tanques, Utensilios, etc.) -->
+        <div class="category-cards-row" id="categoryCardsRow">
+          <!-- 1. Automotriz Card (Active by default, matching mockup) -->
+          <div class="category-select-card active" data-category="Automotriz" id="catTabAutomotriz">
+            <img src="./assets/cat-automotriz.jpg" alt="Automotriz" class="cat-card-bg-img">
+            <span class="cat-card-overlay-title">Automotriz</span>
+          </div>
+
+          <!-- 2. Tanques Card -->
+          <div class="category-select-card" data-category="Tanques" id="catTabTanques">
+            <img src="./assets/cat-tanques.jpg" alt="Tanques" class="cat-card-bg-img">
+            <span class="cat-card-overlay-title">Tanques</span>
+          </div>
+
+          <!-- 3. Utensilios Card -->
+          <div class="category-select-card" data-category="Utensilios" id="catTabUtensilios">
+            <img src="./assets/cat-utensilios.jpg" alt="Utensilios" class="cat-card-bg-img">
+            <span class="cat-card-overlay-title">Utensilios</span>
+          </div>
+
+          <!-- 4. Herramientas Card -->
+          <div class="category-select-card" data-category="Herramientas" id="catTabHerramientas">
+            <img src="./assets/banner-ferreteria.jpg" alt="Herramientas" class="cat-card-bg-img">
+            <span class="cat-card-overlay-title">Herramientas</span>
+          </div>
+
+          <!-- 5. Fijaciones y Anclaje Card -->
+          <div class="category-select-card" data-category="Fijaciones" id="catTabFijaciones">
+            <img src="./assets/banner-ferreteria.jpg" alt="Fijaciones" class="cat-card-bg-img">
+            <span class="cat-card-overlay-title">Fijaciones</span>
+          </div>
+        </div>
+
+        <!-- Dots indicator below category selector cards (matching mockup) -->
+        <div class="category-shelf-dots" id="categoryShelfDots">
+          <span class="cat-dot active" data-cat-dot="0"></span>
+          <span class="cat-dot" data-cat-dot="1"></span>
+          <span class="cat-dot" data-cat-dot="2"></span>
+        </div>
+
+        <!-- THE SOLID ORANGE SHELF ENCLOSURE (Thick orange field enclosing 3 white cards) -->
+        <div class="category-shelf-enclosure" id="categoryShelfEnclosure">
+          <div class="shelf-active-header">
+            <span class="shelf-active-title" id="shelfActiveCategoryTitle">Productos Destacados Automotriz</span>
+            <span class="shelf-guarantee-badge">Garantía Directa</span>
+          </div>
+
+          <!-- Grid / Row of White Product Cards inside the Solid Orange Container -->
+          <div class="shelf-products-grid" id="orangeShelfContainer">
+            <!-- Populated dynamically via JS with Dr care Motor Flush cards -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 7. SECONDARY HARDWARE BANNER (Tornillos y Herramientas) -->
+      <section class="secondary-banner-section">
+        <div class="secondary-banner-wrapper">
+          <img src="./assets/banner-ferreteria.jpg" alt="Tornillos y Accesorios de Ferretería" class="secondary-banner-img">
+        </div>
+        <div class="category-triplet-dots">
+          <span class="slider-dot active" style="width: 22px;"></span>
+          <span class="slider-dot"></span>
+          <span class="slider-dot"></span>
+        </div>
+      </section>
+
+      <!-- 8. SECOND PRODUCT SHELF (Clean Grid) -->
+      <section class="secondary-shelf-section">
+        <h3 class="shelf-title" id="shelfActiveBrandTitle">Catálogo Destacado Casa Total</h3>
+        <div class="products-grid-3col" id="secondaryProductsContainer">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- Extra spacing for fixed bottom navigation -->
+      <div class="bottom-spacer"></div>
+
+    </main>
+
+    <!-- 9. BOTTOM NAVIGATION BAR (Jet Black Stadium Capsule with Orange Elevated Home) -->
+    <nav class="bottom-nav-bar" id="bottomNavBar">
+      <!-- 1. Asesoría -->
+      <button class="nav-item" id="navChat" aria-label="Asesoría">
+        <div class="nav-icon-wrap">
+          <svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 5C9.72 5 3 11.27 3 19c0 3.1 1.08 5.96 2.93 8.27L4.5 32l5.42-1.74C12.18 31.33 15 32 18 32c8.28 0 15-6.27 15-13S26.28 5 18 5z" stroke-width="2.6"/>
+            <circle cx="12" cy="18.5" r="1.6" fill="currentColor" stroke="none"/>
+            <circle cx="18" cy="18.5" r="1.6" fill="currentColor" stroke="none"/>
+            <circle cx="24" cy="18.5" r="1.6" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <span class="nav-label">Asesoría</span>
+      </button>
+
+      <!-- 2. Destacados -->
+      <button class="nav-item" id="navDestacados" aria-label="Destacados">
+        <div class="nav-icon-wrap">
+          <svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <!-- 5-pointed star -->
+            <polygon points="18,7.5 21.6,14.5 29.5,15.6 23.8,21.2 25.2,29 18,25.2 10.8,29 12.2,21.2 6.5,15.6 14.4,14.5" stroke-width="2.5"/>
+            <!-- Radiating sparkle rays -->
+            <line x1="18" y1="2" x2="18" y2="4.5" stroke-width="2.2"/>
+            <line x1="7" y1="7.5" x2="9" y2="9.5" stroke-width="2.2"/>
+            <line x1="29" y1="7.5" x2="27" y2="9.5" stroke-width="2.2"/>
+            <line x1="3.5" y1="20" x2="5.5" y2="20" stroke-width="2.2"/>
+            <line x1="32.5" y1="20" x2="30.5" y2="20" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <span class="nav-label">Destacados</span>
+      </button>
+
+      <!-- 3. Home (Center Elevated Orange Circle with Rounded White House Outline) -->
+      <button class="nav-item nav-item-home active" id="navHome" aria-label="Inicio">
+        <div class="home-circle-badge">
+          <svg viewBox="0 0 48 48" width="38" height="38" fill="none" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 7.5 L8 20.5 H13 V 37.5 H 35 V 20.5 H 40 Z"/>
+          </svg>
+        </div>
+      </button>
+
+      <!-- 4. Favorito -->
+      <button class="nav-item" id="navFavoritos" aria-label="Favorito">
+        <div class="nav-icon-wrap">
+          <svg viewBox="0 0 32 32" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 26.5l-1.8-1.63C7.8 19.12 3.5 15.3 3.5 10.5 C3.5 6.63 6.55 3.6 10.4 3.6c2.18 0 4.27 1.02 5.6 2.62 1.33-1.6 3.42-2.62 5.6-2.62 3.85 0 6.9 3.03 6.9 6.9 0 4.8-4.3 8.62-10.7 14.37L16 26.5z"/>
+          </svg>
+          <span class="fav-count-pill" id="favCountPill">0</span>
+        </div>
+        <span class="nav-label">Favorito</span>
+      </button>
+
+      <!-- 5. Ofertas -->
+      <button class="nav-item" id="navOfertas" aria-label="Ofertas">
+        <div class="nav-icon-wrap">
+          <svg viewBox="0 0 32 32" width="27" height="27" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Flame outline -->
+            <path d="M18 3C18 6.5 20.5 9 23 12C25.5 15 25.5 18 25.5 20C25.5 25.2 21.2 29 16 29C10.8 29 6.5 25.2 6.5 20C6.5 16 8.5 12.5 12 10C12 12.5 14 14 15.5 14C17 14 17.8 12.5 17.8 10.5C17.8 7.5 16.5 5 18 3Z" stroke-width="2.5"/>
+            <!-- Percent sign inside flame -->
+            <line x1="18.5" y1="17.5" x2="13.5" y2="23.5" stroke-width="2"/>
+            <circle cx="13.5" cy="18" r="1.3" stroke-width="1.6"/>
+            <circle cx="18.5" cy="23" r="1.3" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <span class="nav-label">Ofertas</span>
+      </button>
+    </nav>
+
+    <!-- 10. SIDE MENU DRAWER (DEPARTAMENTOS - Exact Match to categorias.jpg) -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <aside class="departments-drawer" id="departmentsDrawer">
+      <div class="drawer-header">
+        <div class="drawer-top-row">
+          <button class="drawer-close-btn" id="closeDrawerBtn" aria-label="Cerrar Menú">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+          <div class="drawer-logo">
+            <img src="./logo.png" alt="Casa Total Logo">
+          </div>
+          <div style="width: 38px;"></div>
+        </div>
+        <form class="drawer-search-form" id="drawerSearchForm">
+          <input type="text" placeholder="Buscar productos..." id="drawerSearchInput">
+          <button type="submit">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="white"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          </button>
+        </form>
+      </div>
+
+      <div class="drawer-content">
+        <h3 class="drawer-title">Departamentos</h3>
+
+        <!-- Ferretería Department Accordion -->
+        <div class="department-section">
+          <h4 class="dept-header-title">Ferretería</h4>
+          <ul class="accordion-list" id="ferreteriaAccordion">
+            <!-- 1. Accesorios para herramientas (Expanded by default matching mockup) -->
+            <li class="accordion-item expanded" data-cat="Accesorios para herramientas">
+              <button class="accordion-trigger">
+                <span>Accesorios para herramientas</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel" style="max-height: 500px;">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Bolsos y maletas">Bolsos y maletas</li>
+                  <li class="subcat-item" data-subcat="Brocas">Brocas</li>
+                  <li class="subcat-item" data-subcat="Cepillos">Cepillos</li>
+                  <li class="subcat-item" data-subcat="Discos de corte">Discos de corte</li>
+                  <li class="subcat-item" data-subcat="Esenciales">Esenciales</li>
+                  <li class="subcat-item" data-subcat="Lijas">Lijas</li>
+                  <li class="subcat-item" data-subcat="Repuestos">Repuestos</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 2. Automotriz -->
+            <li class="accordion-item" data-cat="Automotriz">
+              <button class="accordion-trigger">
+                <span>Automotriz</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Limpiador Motor Flush">Limpiador Motor Flush</li>
+                  <li class="subcat-item" data-subcat="Gatos Hidráulicos">Gatos Hidráulicos</li>
+                  <li class="subcat-item" data-subcat="Aceites y Lubricantes">Aceites y Lubricantes</li>
+                  <li class="subcat-item" data-subcat="Baterías Automotrices">Baterías Automotrices</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 3. Baños -->
+            <li class="accordion-item" data-cat="Baños">
+              <button class="accordion-trigger">
+                <span>Baños</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Griferías y Llaves">Griferías y Llaves</li>
+                  <li class="subcat-item" data-subcat="Duchas y Regaderas">Duchas y Regaderas</li>
+                  <li class="subcat-item" data-subcat="Sanitarios y Lavamanos">Sanitarios y Lavamanos</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 4. Cerrajería -->
+            <li class="accordion-item" data-cat="Cerrajería">
+              <button class="accordion-trigger">
+                <span>Cerrajería</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Candados de Seguridad">Candados de Seguridad</li>
+                  <li class="subcat-item" data-subcat="Cerraduras y Cerrojos">Cerraduras y Cerrojos</li>
+                  <li class="subcat-item" data-subcat="Manillas y Cilindros">Manillas y Cilindros</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 5. Construcción -->
+            <li class="accordion-item" data-cat="Construcción">
+              <button class="accordion-trigger">
+                <span>Construcción</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Carretillas y Palas">Carretillas y Palas</li>
+                  <li class="subcat-item" data-subcat="Escaleras de Aluminio">Escaleras de Aluminio</li>
+                  <li class="subcat-item" data-subcat="Cemento y Mezclas">Cemento y Mezclas</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 6. Electricidad -->
+            <li class="accordion-item" data-cat="Electricidad">
+              <button class="accordion-trigger">
+                <span>Electricidad</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Extensiones Eléctricas">Extensiones Eléctricas</li>
+                  <li class="subcat-item" data-subcat="Cables y Alambres">Cables y Alambres</li>
+                  <li class="subcat-item" data-subcat="Tomacorrientes e Interruptores">Tomacorrientes e Interruptores</li>
+                  <li class="subcat-item" data-subcat="Breakers y Tableros">Breakers y Tableros</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 7. Equipos de protección personal -->
+            <li class="accordion-item" data-cat="Equipos de protección personal">
+              <button class="accordion-trigger">
+                <span>Equipos de protección personal</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Cascos de Seguridad">Cascos de Seguridad</li>
+                  <li class="subcat-item" data-subcat="Lentes Protectores">Lentes Protectores</li>
+                  <li class="subcat-item" data-subcat="Guantes de Trabajo">Guantes de Trabajo</li>
+                  <li class="subcat-item" data-subcat="Mascarillas y Respiradores">Mascarillas y Respiradores</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 8. Equipos y herramientas a motor -->
+            <li class="accordion-item" data-cat="Equipos y herramientas a motor">
+              <button class="accordion-trigger">
+                <span>Equipos y herramientas a motor</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Taladros y Rotomartillos">Taladros y Rotomartillos</li>
+                  <li class="subcat-item" data-subcat="Esmeriles y Amoladoras">Esmeriles y Amoladoras</li>
+                  <li class="subcat-item" data-subcat="Sierras Circulares">Sierras Circulares</li>
+                  <li class="subcat-item" data-subcat="Generadores Eléctricos">Generadores Eléctricos</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 9. Fijaciones y Anclaje -->
+            <li class="accordion-item" data-cat="Fijaciones y Anclaje">
+              <button class="accordion-trigger">
+                <span>Fijaciones y Anclaje</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Tornillos Autoperforantes">Tornillos Autoperforantes</li>
+                  <li class="subcat-item" data-subcat="Tarugos y Ramplug">Tarugos y Ramplug</li>
+                  <li class="subcat-item" data-subcat="Tuercas y Arandelas">Tuercas y Arandelas</li>
+                  <li class="subcat-item" data-subcat="Pernos de Anclaje">Pernos de Anclaje</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 10. Herramientas manuales -->
+            <li class="accordion-item" data-cat="Herramientas manuales">
+              <button class="accordion-trigger">
+                <span>Herramientas manuales</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Martillos y Mazos">Martillos y Mazos</li>
+                  <li class="subcat-item" data-subcat="Destornilladores">Destornilladores</li>
+                  <li class="subcat-item" data-subcat="Alicates y Pinzas">Alicates y Pinzas</li>
+                  <li class="subcat-item" data-subcat="Llaves Inglesas y Dados">Llaves Inglesas y Dados</li>
+                  <li class="subcat-item" data-subcat="Cintas Métricas">Cintas Métricas</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 11. Iluminación -->
+            <li class="accordion-item" data-cat="Iluminación">
+              <button class="accordion-trigger">
+                <span>Iluminación</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Reflectores LED">Reflectores LED</li>
+                  <li class="subcat-item" data-subcat="Bombillos Ahorradores">Bombillos Ahorradores</li>
+                  <li class="subcat-item" data-subcat="Linternas Recargables">Linternas Recargables</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 12. Jardínes y exteriores -->
+            <li class="accordion-item" data-cat="Jardínes y exteriores">
+              <button class="accordion-trigger">
+                <span>Jardínes y exteriores</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Mangueras y Conectores">Mangueras y Conectores</li>
+                  <li class="subcat-item" data-subcat="Tijeras de Podar">Tijeras de Podar</li>
+                  <li class="subcat-item" data-subcat="Fumigadoras y Aspersores">Fumigadoras y Aspersores</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 13. Pilas y baterías -->
+            <li class="accordion-item" data-cat="Pilas y baterías">
+              <button class="accordion-trigger">
+                <span>Pilas y baterías</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Pilas Alcalinas AA / AAA">Pilas Alcalinas AA / AAA</li>
+                  <li class="subcat-item" data-subcat="Baterías Recargables">Baterías Recargables</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 14. Pintura -->
+            <li class="accordion-item" data-cat="Pintura">
+              <button class="accordion-trigger">
+                <span>Pintura</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Brochas y Rodillos">Brochas y Rodillos</li>
+                  <li class="subcat-item" data-subcat="Pinturas y Esmaltes">Pinturas y Esmaltes</li>
+                  <li class="subcat-item" data-subcat="Solventes y Selladores">Solventes y Selladores</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 15. Plomería -->
+            <li class="accordion-item" data-cat="Plomería">
+              <button class="accordion-trigger">
+                <span>Plomería</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Bombas de Agua">Bombas de Agua</li>
+                  <li class="subcat-item" data-subcat="Tuberías y Conexiones PVC">Tuberías y Conexiones PVC</li>
+                  <li class="subcat-item" data-subcat="Válvulas y Llaves de Paso">Válvulas y Llaves de Paso</li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 16. Puertas -->
+            <li class="accordion-item" data-cat="Puertas">
+              <button class="accordion-trigger">
+                <span>Puertas</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Bisagras">Bisagras</li>
+                  <li class="subcat-item" data-subcat="Cerraduras de Pomo">Cerraduras de Pomo</li>
+                  <li class="subcat-item" data-subcat="Topes y Herrajes">Topes y Herrajes</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Hogar Department Accordion -->
+        <div class="department-section">
+          <h4 class="dept-header-title">Hogar</h4>
+          <ul class="accordion-list" id="hogarAccordion">
+            <li class="accordion-item" data-cat="Cocina y Utensilios">
+              <button class="accordion-trigger">
+                <span>Cocina y Utensilios</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Baterías de Cocina">Baterías de Cocina</li>
+                  <li class="subcat-item" data-subcat="Sartenes y Ollas">Sartenes y Ollas</li>
+                  <li class="subcat-item" data-subcat="Cuchillos y Tablas">Cuchillos y Tablas</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="accordion-item" data-cat="Tanques y Almacenamiento">
+              <button class="accordion-trigger">
+                <span>Tanques y Almacenamiento</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Tanques Cilíndricos 1000L">Tanques Cilíndricos 1000L</li>
+                  <li class="subcat-item" data-subcat="Tanques 500L">Tanques 500L</li>
+                  <li class="subcat-item" data-subcat="Estanterías Metálicas">Estanterías Metálicas</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="accordion-item" data-cat="Organización y Limpieza">
+              <button class="accordion-trigger">
+                <span>Organización y Limpieza</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Mopas y Baldes">Mopas y Baldes</li>
+                  <li class="subcat-item" data-subcat="Escobas y Cepillos">Escobas y Cepillos</li>
+                  <li class="subcat-item" data-subcat="Cajas Organizadoras">Cajas Organizadoras</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="accordion-item" data-cat="Climatización">
+              <button class="accordion-trigger">
+                <span>Climatización</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="subcat-list">
+                  <li class="subcat-item" data-subcat="Ventiladores de Pie y Techo">Ventiladores de Pie y Techo</li>
+                  <li class="subcat-item" data-subcat="Extractores de Aire">Extractores de Aire</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 11. CART SLIDE-IN MODAL -->
+    <div class="modal-backdrop" id="cartBackdrop"></div>
+    <div class="cart-flyout-modal" id="cartFlyout">
+      <div class="flyout-header">
+        <div class="flyout-title">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <h3>Carrito Casa Total</h3>
+        </div>
+        <button class="close-flyout-btn" id="closeCartBtn">&times;</button>
+      </div>
+
+      <div class="cart-items-list" id="cartItemsContainer">
+        <!-- Filled dynamically via JS -->
+      </div>
+
+      <div class="cart-summary-footer" id="cartSummaryFooter">
+        <div class="summary-line">
+          <span>Subtotal:</span>
+          <span class="sum-val" id="cartSubtotalUsd">USD 0,00</span>
+        </div>
+        <div class="summary-line rate-bs">
+          <span>Tasa Oficial BCV:</span>
+          <span class="sum-val" id="cartSubtotalBs">Bs 0,00</span>
+        </div>
+        <div class="cart-actions-row">
+          <button class="checkout-btn" id="checkoutBtn">
+            Finalizar Compra
+          </button>
+          <button class="whatsapp-order-btn" id="whatsappOrderBtn" title="Pedir por WhatsApp">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.19-.09-1.11-.55-1.28-.61-.17-.07-.3-.1-.43.1-.13.19-.5 0.61-.61.73-.11.13-.23.15-.42.05-.19-.09-.81-.3-1.54-.95-.57-.51-.95-1.14-1.06-1.33-.11-.19-.01-.3.08-.39.09-.09.19-.23.29-.35.09-.11.13-.19.19-.32.06-.13.03-.25-.01-.34-.05-.09-.43-1.04-.59-1.42-.16-.38-.32-.33-.44-.33h-.37c-.13 0-.34.05-.52.24-.18.19-.69.67-.69 1.64 0 .97.71 1.9 1.01 2.1.3.2 1.4 2.14 3.39 3 1.99.85 1.99.57 2.35.53.36-.04 1.15-.47 1.31-.93.16-.46.16-.86.11-.93-.05-.07-.18-.12-.37-.21z"/></svg>
+            Comprar por WhatsApp Casa Total
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. PRODUCT DETAIL MODAL -->
+    <div class="modal-backdrop" id="productModalBackdrop"></div>
+    <div class="product-detail-modal" id="productDetailModal">
+      <button class="close-flyout-btn detail-close-btn" id="closeDetailBtn">&times;</button>
+      <div class="detail-modal-body" id="detailModalBody">
+        <!-- Filled dynamically via JS -->
+      </div>
+    </div>
+
+    <!-- 11b. CHECKOUT FLOW MODAL -->
+    <div class="modal-backdrop" id="checkoutModalBackdrop"></div>
+    <div class="checkout-modal" id="checkoutModal">
+      <div class="checkout-header">
+        <h3>Finalizar Compra Casa Total</h3>
+        <button class="close-flyout-btn" id="closeCheckoutBtn">&times;</button>
+      </div>
+      <div id="checkoutModalContent">
+        <!-- Filled dynamically via JS -->
+      </div>
+    </div>
+
+    <!-- 12. ATENCIÓN AL CLIENTE / ASESORÍA MODAL -->
+    <div class="modal-backdrop" id="chatModalBackdrop"></div>
+    <div class="chat-advisor-modal" id="chatAdvisorModal">
+      <div class="chat-modal-header">
+        <div class="chat-advisor-info">
+          <div class="advisor-avatar">CT</div>
+          <div>
+            <h4>Asesoría Casa Total</h4>
+            <span class="online-indicator">Canal Oficial casatotal.com</span>
+          </div>
+        </div>
+        <button class="close-flyout-btn" id="closeChatBtn">&times;</button>
+      </div>
+      <div class="chat-messages-container" id="chatMessages">
+        <div class="chat-msg bot">
+          ¡Hola! Bienvenido a la tienda oficial de <strong>Casa Total</strong> (casatotal.com). ¿En qué proyecto o herramienta te podemos asesorar hoy?
+        </div>
+      </div>
+      <div class="chat-quick-replies">
+        <button class="reply-chip" onclick="app.sendQuickReply('¿Tienen disponibilidad de Limpiador Motor Flush?')">Disponibilidad Dr Care 🛢️</button>
+        <button class="reply-chip" onclick="app.sendQuickReply('¿Hacen envíos a nivel nacional?')">Envíos nacionales 🚚</button>
+        <button class="reply-chip" onclick="app.sendQuickReply('¿Cuáles son los métodos de pago en Venezuela?')">Métodos de pago 💳</button>
+        <button class="reply-chip" onclick="app.sendQuickReply('Quiero contactar a un asesor por WhatsApp')">WhatsApp directo 📲</button>
+      </div>
+      <form class="chat-input-bar" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Escribe tu consulta...">
+        <button type="submit" class="send-chat-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- 13. TOAST NOTIFICATION -->
+    <div class="toast-notification" id="toastNotification">
+      <span class="toast-icon">✓</span>
+      <span class="toast-message" id="toastMessage">Producto agregado al carrito</span>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
